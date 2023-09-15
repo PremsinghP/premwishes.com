@@ -27,4 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
         nameInput.value = "";
         messageInput.value = "";
     });
+
+    // Function to clear birthday wishes after 24 hours
+    function clearWishes() {
+        wishesList.innerHTML = ""; // Clear the wishes list
+    }
+
+    // Set a timer to clear wishes after 24 hours (24 * 60 * 60 * 1000 milliseconds)
+    setInterval(clearWishes, 24 * 60 * 60 * 1000);
 });
