@@ -1,34 +1,31 @@
-// Set the date of Aliya's birthday (September 16, 2023, at 00:00:00 UTC)
-const birthdayDate = new Date("2023-09-16T00:00:00").getTime();
-
-// Function to update the countdown
 function updateCountdown() {
-    const currentDate = new Date().getTime();
-    const timeLeft = birthdayDate - currentDate;
+    const currentDate = new Date();
+    const birthdayDate = new Date(currentDate.getFullYear(), 8, 16); // September is month 8 (0-based index)
 
-    if (timeLeft <= 0) {
+    // Check if today is the birthday
+    if (currentDate.getMonth() === 8 && currentDate.getDate() === 16) {
         clearInterval(countdown);
         document.getElementById("countdown").innerHTML = "<p>Happy Birthday Aliya!</p>";
-    } else {
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerHTML = formatTime(days);
-        document.getElementById("hours").innerHTML = formatTime(hours);
-        document.getElementById("minutes").innerHTML = formatTime(minutes);
-        document.getElementById("seconds").innerHTML = formatTime(seconds);
+    } else if (currentDate > birthdayDate) {
+        // If birthday has passed this year, set it for next year
+        birthdayDate.setFullYear(currentDate.getFullYear() + 1);
     }
+
+    const timeLeft = birthdayDate - currentDate;
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = formatTime(days);
+    document.getElementById("hours").textContent = formatTime(hours);
+    document.getElementById("minutes").textContent = formatTime(minutes);
+    document.getElementById("seconds").textContent = formatTime(seconds);
 }
 
-// Update the countdown immediately
-updateCountdown();
-
-// Check and update the countdown every second
-const countdown = setInterval(updateCountdown, 1000);
-
-// Function to format time as "00" for single digits
 function formatTime(time) {
     return time < 10 ? `0${time}` : time;
 }
+
+updateCountdown();
+const countdown = setInterval(updateCountdown, 1000);
