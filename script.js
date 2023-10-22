@@ -1,14 +1,14 @@
 function updateCountdown() {
     const currentDate = new Date();
-    const birthdayDate = new Date(currentDate.getFullYear(), 10, 23);
+    let birthdayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
 
     // Check if today is the birthday
     if (currentDate.getMonth() === 10 && currentDate.getDate() === 23) {
         clearInterval(countdown);
-        document.getElementById("countdown").innerHTML = "<p>Happy Birthday Padya Mounika (Jerry) & Chota Jerry Ga!</p>";
+        document.getElementById("countdown").innerHTML = "<p>Happy Birthday Padya MounikaJeevan (Jerry) & Chota Jerry Ga!</p>";
     } else if (currentDate > birthdayDate) {
         // If birthday has passed this year, set it for next year
-        birthdayDate.setFullYear(currentDate.getFullYear() + 1);
+        birthdayDate = new Date(currentDate.getFullYear() + 1, 10, 23);
     }
 
     const timeLeft = birthdayDate - currentDate;
@@ -27,16 +27,6 @@ function updateCountdown() {
         document.getElementById("minutes").textContent = formatTime(minutes);
         document.getElementById("seconds").textContent = formatTime(seconds);
     }
-}
-
-function formatTime(time) {
-    return time < 10 ? `0${time}` : time;
-}
-
-function daysBetween(date1, date2) {
-    // Calculate the difference in days between two dates
-    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    return Math.floor(Math.abs((date1 - date2) / oneDay));
 }
 
 updateCountdown();
