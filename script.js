@@ -1,11 +1,11 @@
 function updateCountdown() {
     const currentDate = new Date();
-    const birthdayDate = new Date(currentDate.getFullYear(), 8, 16); // September is month 8 (0-based index)
+    const birthdayDate = new Date(currentDate.getFullYear(), 10, 23);
 
     // Check if today is the birthday
-    if (currentDate.getMonth() === 8 && currentDate.getDate() === 16) {
+    if (currentDate.getMonth() === 10 && currentDate.getDate() === 23) {
         clearInterval(countdown);
-        document.getElementById("countdown").innerHTML = "<p>Happy Birthday Aliya!</p>";
+        document.getElementById("countdown").innerHTML = "<p>Happy Birthday Padya Mounika (Jerry) & Chota Jerry Ga!</p>";
     } else if (currentDate > birthdayDate) {
         // If birthday has passed this year, set it for next year
         birthdayDate.setFullYear(currentDate.getFullYear() + 1);
